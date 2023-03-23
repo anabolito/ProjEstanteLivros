@@ -61,6 +61,11 @@ namespace ProjEstanteLivros
         //    return $"Título: {this.Title}  *  Autor: {this.Author}  *  ISBN: {this.ISBN}  *  Estado: {this.Reading} ";
 
         //}
+
+        public string ToStringSegundo()
+        {
+            return $" Título: {this.Title} * Autor: {this.Author}  *  ISBN: {this.ISBN}  *  Estado de leitura: {this.Reading}";
+        }
         public override string ToString()
         {
             return $"{this.Title} * {this.Author}  *  {this.ISBN}  *  {this.Reading}";

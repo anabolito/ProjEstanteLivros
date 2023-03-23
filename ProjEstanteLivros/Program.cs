@@ -1,4 +1,5 @@
 ﻿using ProjEstanteLivros;
+using System;
 using System.Reflection;
 using System.Security.AccessControl;
 
@@ -28,7 +29,6 @@ internal class Program
             {
                 case 1:
                     AddBooks();
-                    //escrever o arquivo;
                     Console.Clear();
                     break;
 
@@ -118,6 +118,182 @@ internal class Program
 
         //MÉTODOS////////////////////////////
 
+        
+        void WriteFileShelf(Book book)
+        {
+            try
+            {
+                if (File.Exists("shelf.txt"))
+                {
+                    var temp = ReadFile("shelf.txt");
+
+                    StreamWriter sw = new("shelf.txt");
+                    sw.WriteLine(temp + shelf.ToString());
+                    sw.Close();
+                }
+                else
+                {
+                    StreamWriter sw = new("shelf.txt");
+                    sw.WriteLine(shelf.ToString());
+                    sw.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Livro gravado com sucesso!");
+                Thread.Sleep(1000);
+            }
+        }
+        void WriteFileLend(Book book)
+        {
+            try
+            {
+                if (File.Exists("lend.txt"))
+                {
+                    var temp = ReadFile("lend.txt");
+
+                    StreamWriter sw = new("lend.txt");
+                    sw.WriteLine(temp + lend.ToString());
+                    sw.Close();
+                }
+                else
+                {
+                    StreamWriter sw = new("lend.txt");
+                    sw.WriteLine(shelf.ToString());
+                    sw.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Livro gravado com sucesso!");
+                Thread.Sleep(1000);
+            }
+        }
+
+        void WriteFileToRead(Book book)
+        {
+            try
+            {
+                if (File.Exists("toRead.txt"))
+                {
+                    var temp = ReadFile("toRead.txt");
+
+                    StreamWriter sw = new("toRead.txt");
+                    sw.WriteLine(temp + toRead.ToString());
+                    sw.Close();
+                }
+                else
+                {
+                    StreamWriter sw = new("toRead.txt");
+                    sw.WriteLine(toRead.ToString());
+                    sw.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Livro gravado com sucesso!");
+                Thread.Sleep(1000);
+            }
+        }
+
+        void WriteFileIsReading(Book book)
+        {
+            try
+            {
+                if (File.Exists("isReading.txt"))
+                {
+                    var temp = ReadFile("isReading.txt");
+
+                    StreamWriter sw = new("isReading.txt");
+                    sw.WriteLine(temp + isReading.ToString());
+                    sw.Close();
+                }
+                else
+                {
+                    StreamWriter sw = new("isReading.txt");
+                    sw.WriteLine(isReading.ToString());
+                    sw.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Livro gravado com sucesso!");
+                Thread.Sleep(1000);
+            }
+        }
+
+        void WriteFileAlreadyRead(Book book)
+        {
+            try
+            {
+                if (File.Exists("alreadyRead.txt"))
+                {
+                    var temp = ReadFile("alreadyRead.txt");
+
+                    StreamWriter sw = new("alreadyRead.txt");
+                    sw.WriteLine(temp + alreadyRead.ToString());
+                    sw.Close();
+                }
+                else
+                {
+                    StreamWriter sw = new("alreadyRead.txt");
+                    sw.WriteLine(alreadyRead.ToString());
+                    sw.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Livro gravado com sucesso!");
+                Thread.Sleep(1000);
+            }
+        }
+
+
+        string ReadFile(string f)
+        {
+            StreamReader sr = new StreamReader(f);
+            string text = "";
+
+            try
+            {
+                text = sr.ReadToEnd();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                sr.Close();
+            }
+            return text;
+        }
+
         void AddBooks()
         {
             while (changeMore != false)
@@ -138,6 +314,9 @@ internal class Program
                 } while (reading != "0" && reading != "1" && reading != "2");
 
                 Book book = new(t, a, isbn, reading);
+
+                WriteFileShelf(book);  // implementando o livro em um arquivo 
+
                 shelf.Add(book);
                 foreach (var b in shelf)
                 {
